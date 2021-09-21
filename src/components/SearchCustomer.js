@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, {useEffect, useState, Fragment} from 'react'
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import CustomerCard from './CustomerCard';
+// import Box from '@mui/material/Box';
+// import Grid from '@mui/material/Grid';
+// import CustomerCard from './CustomerCard';
 import Filter  from './Filter';
+import CustomerTable from './CustomersTable';
+import Container from '@mui/material/Container';
 
 export  default function SearchCustomer(){
   const [clients, setClients] = useState([])
@@ -75,7 +77,7 @@ export  default function SearchCustomer(){
         handlePhoneNumber={handlePhoneNumber}
         phoneNumbere={phoneNumber}
       />
-      <Box sx={{ flexGrow: 1}}>
+      {/* <Box sx={{ flexGrow: 1}}>
         <Grid container spacing={2}>
           {
             sortedAndFilteredClients.map((client, index) => (
@@ -85,7 +87,10 @@ export  default function SearchCustomer(){
             ))
           }
         </Grid>
-      </Box>
+      </Box> */}
+      <Container maxWidth="md">
+        <CustomerTable customers={sortedAndFilteredClients}/>
+      </Container>
     </Fragment>
   
   )
