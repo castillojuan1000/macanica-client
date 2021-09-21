@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, {useEffect, useState, Fragment} from 'react'
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import CustomerCard from './CustomerCard';
 import Filter  from './Filter';
+import Container from '@mui/material/Container';
+import CustomersTablePagination from './TablePagination';
+
 
 export  default function SearchCustomer(){
   const [clients, setClients] = useState([])
@@ -75,17 +75,9 @@ export  default function SearchCustomer(){
         handlePhoneNumber={handlePhoneNumber}
         phoneNumbere={phoneNumber}
       />
-      <Box sx={{ flexGrow: 1}}>
-        <Grid container spacing={2}>
-          {
-            sortedAndFilteredClients.map((client, index) => (
-              <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
-                <CustomerCard customerData={client}/>
-              </Grid>
-            ))
-          }
-        </Grid>
-      </Box>
+      <Container maxWidth="md">
+        <CustomersTablePagination customers={sortedAndFilteredClients}/>
+      </Container>
     </Fragment>
   
   )
