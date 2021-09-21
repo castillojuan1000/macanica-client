@@ -51,7 +51,9 @@ export  default function SearchCustomer(){
 
 
   const handleName = (event) => {
+    console.log(event.target.value)
     setName(event.target.value)
+    
   }
 
   const handleLastName = event => {
@@ -62,6 +64,7 @@ export  default function SearchCustomer(){
     setPhoneNumber(event.target.value)
   }
 
+ 
   return(
     <Fragment>
       <Filter 
