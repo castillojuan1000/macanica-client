@@ -10,8 +10,8 @@ export default function CustomerCard({customerData}) {
   const {FirstName, LastName, Phone} = customerData;
   const phoneNumberDashes = Phone.slice(0,3)+"-"+Phone.slice(3,6)+"-"+Phone.slice(6)
 
-  const firstNameCap = FirstName.charAt(0).toUpperCase() + FirstName.slice(1);
-  const lastNameCap = LastName.charAt(0).toUpperCase() + LastName.slice(1);
+  const firstNameCap = FirstName.charAt(0).toUpperCase() + FirstName.slice(1).trim();
+  const lastNameCap = LastName.charAt(0).toUpperCase() + LastName.slice(1).trim();
 
   const handleClick = () => {
     alert("Card cliked")
