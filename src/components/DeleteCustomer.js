@@ -2,8 +2,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,8 +21,15 @@ export default function DeleteCustomer() {
 
   const handleClose = (event) => {
     event.stopPropagation();
+    console.log("Cancelar eleminar al cliente")
     setOpen(false);
   };
+
+  const handleDeleteCustomer = (event) => {
+    event.stopPropagation();
+    console.log("API to delete Customer")
+    setOpen(false)
+  }
 
   return (
     <div>
@@ -42,16 +47,23 @@ export default function DeleteCustomer() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
+        <DialogTitle>{"Estas Seguro Que Deseas Eleminar Este Cliente?"}</DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
+          <Button 
+            onClick={handleClose}
+            variant="outlined" 
+            color="success"
+          >
+            Cancelar
+          </Button>
+
+          <Button 
+            onClick={handleDeleteCustomer}
+            variant="outlined" 
+            color="error"
+          >
+            Eleminar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
