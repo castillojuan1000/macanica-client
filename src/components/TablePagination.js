@@ -17,6 +17,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/material/styles';
 import TableHead from '@mui/material/TableHead';
+import DeleteCustomer from './DeleteCustomer';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -140,7 +141,10 @@ export default function CustomersTablePagination({customers}) {
             const lastNameCap = LastName.charAt(0).toUpperCase() + LastName.slice(1).trim();
 
             return(
-              <StyledTableRow key={index} onClick={()=>console.log('customer')}>
+              <StyledTableRow key={index} onClick={(event)=>{
+                // event.stopPropagation();
+                console.log('customer')
+                }}>
                 <StyledTableCell component="th" scope="row">
                   <strong>{firstNameCap} {lastNameCap}</strong>
                 </StyledTableCell>
@@ -151,7 +155,7 @@ export default function CustomersTablePagination({customers}) {
                   Edit
                 </StyledTableCell>
                 <StyledTableCell style={{ width: 160 }} align="right">
-                  delete
+                  <DeleteCustomer/>
                 </StyledTableCell>
               </StyledTableRow>
             )
