@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
+import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,24 +35,44 @@ export default function EditCustomer({customer}) {
 
   const handleClickOpen = (event) => {
     event.stopPropagation();
+    event.preventDefault();
     setOpen(true);
   };
 
   const handleClose = (event) => {
     event.stopPropagation();
+    setFirstName(FirstName)
+    setLastName(LastName)
+    setPhoneNumber(Phone)
     setOpen(false);
   };
 
-  const handleEditCustomer = (event) => {
+  const handleDialogPropagation = (e) => {
+    e.stopPropagation()
+  }
+
+  const handleUpdateCustomer =  (event) => {
     event.preventDefault();
+    // event.stopPropagation();
+
+    const customerId = customer.ID
+    let newCustomer = {
+      "FirstName": firstName,
+      "LastName": lastName, 
+      "Phone": phoneNumber
+    }
+
+    let url = `http://localhost:8080/update/customer/${customerId}`
+    const headers =  { "Content-Type": "application/json" }
+
+    console.log(newCustomer)
+    axios.put(url, newCustomer, {headers})
+      .then(response => console.log(response))
+      .catch(error => console.log("error client side", error))
+
     
-    console.log({
-      "first Name": firstName, 
-      "last Name": lastName, 
-      "phone Number": phoneNumber
-    })
     setOpen(false);
-    event.stopPropagation();
+    
   }
 
 
@@ -64,10 +85,14 @@ export default function EditCustomer({customer}) {
       >
         <EditIcon />
       </IconButton>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog 
+        open={open} 
+        onClose={handleClose}
+        onClick={handleDialogPropagation}
+        >
         <form 
           className={classes.root}
-          onSubmit={handleEditCustomer}
+          onSubmit={handleUpdateCustomer}
         >
           <TextField
             autoComplete="fname"
@@ -111,7 +136,7 @@ export default function EditCustomer({customer}) {
                 Cancelar
             </Button>
             <Button 
-              onClick={handleEditCustomer}
+              onClick={handleUpdateCustomer}
               variant="outlined" 
               color="warning"
               type="submit"
