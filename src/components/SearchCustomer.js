@@ -19,7 +19,7 @@ export  default function SearchCustomer(){
       .catch(error => {
         console.error('There was an error!', error);
     });
-  }, [clients])
+  }, [])
 
 
 
