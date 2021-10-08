@@ -18,6 +18,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/material/styles';
 import TableHead from '@mui/material/TableHead';
 import DeleteCustomer from './DeleteCustomer';
+import EditCustomer from './EditCustomer';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -149,7 +150,7 @@ export default function CustomersTablePagination({customers}) {
                   <strong>{phoneNumberDashes}</strong>
                 </StyledTableCell>
                 <StyledTableCell style={{ width: 160 }} align="right">
-                  Edit
+                  <EditCustomer customer={customer}/>
                 </StyledTableCell>
                 <StyledTableCell style={{ width: 160 }} align="right">
                   <DeleteCustomer customer={customer}/>
