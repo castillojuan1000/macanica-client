@@ -67,7 +67,7 @@ export default function EditCustomer({customer}) {
 
     console.log(newCustomer)
     axios.put(url, newCustomer, {headers})
-      .then(response => console.log(response))
+      .then(response => window.location = '/')
       .catch(error => console.log("error client side", error))
 
     
