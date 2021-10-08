@@ -42,7 +42,7 @@ export  default function SearchCustomer(){
       if(a.FirstName < b.FirstName) { return -1; }
       if(a.FirstName > b.FirstName) { return 1; }
       return 0;
-    }).slice(1)
+    })
 
 
     setSortedAndFilteredClients(sortedAndFilteredClients)
