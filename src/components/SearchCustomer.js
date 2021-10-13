@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import CustomersTablePagination from './TablePagination';
 
 
-export  default function SearchCustomer(){
+export  default function SearchCustomer({showCustomer}){
   const [clients, setClients] = useState([])
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('')
@@ -76,7 +76,7 @@ export  default function SearchCustomer(){
         phoneNumbere={phoneNumber}
       />
       <Container maxWidth="md">
-        <CustomersTablePagination customers={sortedAndFilteredClients}/>
+        <CustomersTablePagination customers={sortedAndFilteredClients} showCustomer={showCustomer}/>
       </Container>
     </Fragment>
   
