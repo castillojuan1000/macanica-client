@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SearchCustomer from './SearchCustomer';
 import AddCustomer from './AddCustomer';
+import CustomerProfile from './Profile/CustomerProfile';
 
 
 export default function NavTabs(props) {
@@ -11,14 +12,18 @@ export default function NavTabs(props) {
   const { params } = match;
   const { page } = params;
 
+  const [customerSelected, setCustomerSelected] = useState({})
+
   const tabNameToIndex = {
     0: "create",
-    1: "search"
+    1: "search",
+    2: "profile",
   };
 
   const indexToTabName = {
     create: 0,
-    search: 1
+    search: 1,
+    profile: 2,
   };
 
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -27,6 +32,16 @@ export default function NavTabs(props) {
     history.push(`/${tabNameToIndex[newValue]}`);
     setSelectedTab(newValue);
   };
+
+  const handleShowCustomer = (customer) => {
+    setCustomerSelected(customer)
+    setSelectedTab(2)
+    history.push(`/profile`);
+  }
+
+  const handleSelectCustomer = () => {
+    setSelectedTab(1)
+  }
 
   return (
     <Fragment>
@@ -40,10 +55,15 @@ export default function NavTabs(props) {
         >
           <Tab label="Crear Cliente" />
           <Tab label="Buscar Cliente" />
+          <Tab label="Perfil Del Cliente" />
+          
         </Tabs>
       </AppBar>
       {selectedTab === 0 && <AddCustomer />}
-      {selectedTab === 1 && <SearchCustomer />}
+      {selectedTab === 1 && <SearchCustomer showCustomer={handleShowCustomer} />}
+      {selectedTab === 2 && <CustomerProfile customer={customerSelected} selectCustomer={handleSelectCustomer}/>}
+      
     </Fragment>
   );
 }
+

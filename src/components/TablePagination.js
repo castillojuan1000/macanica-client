@@ -103,7 +103,7 @@ TablePaginationActions.propTypes = {
 
 
 
-export default function CustomersTablePagination({customers}) {
+export default function CustomersTablePagination({customers, showCustomer}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -142,7 +142,7 @@ export default function CustomersTablePagination({customers}) {
             const lastNameCap = LastName.charAt(0).toUpperCase() + LastName.slice(1).trim();
 
             return(
-              <StyledTableRow key={index} onClick={()=>console.log('customer table row')}>
+              <StyledTableRow key={index} onClick={()=>showCustomer(customer)}>
                 <StyledTableCell component="th" scope="row">
                   <strong>{firstNameCap} {lastNameCap}</strong>
                 </StyledTableCell>
