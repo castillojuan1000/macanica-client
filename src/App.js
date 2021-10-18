@@ -1,12 +1,13 @@
 import './App.css';
 import NavTabs from './components/NavTabs'
-import {Fragment} from 'react'
+import { Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
   return (
-    <Fragment>
-      <NavTabs />
-    </Fragment>
+    <Switch>
+      <Redirect exact from="/" to="/create" />
+      <Route exact path="/:page?" render={props => <NavTabs {...props} />} />
+    </Switch>
   );
 }
 
