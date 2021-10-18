@@ -4,8 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SearchCustomer from './SearchCustomer';
 import AddCustomer from './AddCustomer';
-import CustomerProfile from './CustomerProfile';
-
+import CustomerProfile from './Profile/CustomerProfile';
 
 
 export default function NavTabs(props) {
@@ -13,7 +12,6 @@ export default function NavTabs(props) {
   const { params } = match;
   const { page } = params;
 
- 
   const [customerSelected, setCustomerSelected] = useState({})
 
   const tabNameToIndex = {
@@ -41,6 +39,10 @@ export default function NavTabs(props) {
     history.push(`/profile`);
   }
 
+  const handleSelectCustomer = () => {
+    setSelectedTab(1)
+  }
+
   return (
     <Fragment>
       <AppBar position="static">
@@ -59,7 +61,7 @@ export default function NavTabs(props) {
       </AppBar>
       {selectedTab === 0 && <AddCustomer />}
       {selectedTab === 1 && <SearchCustomer showCustomer={handleShowCustomer} />}
-      {selectedTab === 2 && <CustomerProfile customer={customerSelected}/>}
+      {selectedTab === 2 && <CustomerProfile customer={customerSelected} selectCustomer={handleSelectCustomer}/>}
       
     </Fragment>
   );
