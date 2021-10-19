@@ -20,8 +20,6 @@ export default function CustomerInfo({customer}){
   const firstChar = FirstName.charAt(0).toUpperCase() 
   const secondChar = LastName.charAt(0).toUpperCase()
 
-  //todo: fix merge conflict 
-  
   return(
     <Fragment>
       <CssBaseline />
