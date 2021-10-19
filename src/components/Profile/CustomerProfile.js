@@ -4,19 +4,21 @@ import Customer from './Customer/Customer'
 
 export default function CustomerProfile({customer, selectCustomer}){
 
-  //todo: store customer in a session, cookie, local storage just till it gets push to the database
-  //todo: should be render when customer gets created as well 
-  console.log(Object.keys(customer).length)
-  console.log(customer)
+  // console.log(Object.keys(customer).length)
+  // console.log(customer)
+  // window.localStorage.setItem('customer', JSON.stringify(customer));
+  const localStoreCustomer = JSON.parse(window.localStorage.getItem('customer'));
+
+  console.log(localStoreCustomer)
 
   return(
     <Fragment>
       {
-        !Object.keys(customer).length > 0 && <SelectCustomerSnackbar selectCustomer={selectCustomer}/>
+        !Object.keys(localStoreCustomer).length > 0 && <SelectCustomerSnackbar selectCustomer={selectCustomer}/>
       }
 
       {
-        Object.keys(customer).length > 0 && <Customer customer={customer}/>
+        Object.keys(localStoreCustomer).length > 0 && <Customer customer={localStoreCustomer}/>
       }
 
     </Fragment>
