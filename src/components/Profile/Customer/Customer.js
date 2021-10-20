@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import CustomerInfo from './CustomerInfo'
-import AddCarForm from './AddCarForm'
+import AddCarForm from '../Cars/AddCarForm'
 import axios from 'axios';
 import CarsAccordions from '../Cars/CarsAccordions'
 

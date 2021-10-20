@@ -8,6 +8,7 @@ import AddServiceForm from './AddServiceForm';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import { blue, deepOrange} from '@mui/material/colors';
 import axios from 'axios';
+import ServicesTimeline from './ServicesTimeline';
 
 export default function SingleCarAccordion({car, expanded, handlePanel}){
   const [services, setServices]= useState([])
@@ -24,8 +25,7 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
       })
       .catch(error => console.error("There was an error fetching cars and its services", error))
   },[carId])
-
-  console.log(services)
+  
   return(
     <Fragment>
       <Accordion expanded={localStoreExtended === `panel${car.ID}`} onChange={handlePanel(`panel${car.ID}`)} key={car.ID}>
@@ -48,6 +48,7 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
         </AccordionSummary>
         <AccordionDetails>
           <AddServiceForm car={car} expanded={expanded} panelId={`panel${car.ID}`}/>
+          <ServicesTimeline services={services}/>
         </AccordionDetails>
       </Accordion>
     </Fragment>
