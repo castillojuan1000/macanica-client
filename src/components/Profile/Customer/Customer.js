@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import CustomerInfo from './CustomerInfo'
 import AddCarForm from './AddCarForm'
 import axios from 'axios';
-import CarAccordion from '../Cars/CarAccordion'
+import CarsAccordions from '../Cars/CarsAccordions'
 
 export default function Customer({customer}){
   const [cars, setCars] = useState([])
@@ -22,7 +22,7 @@ export default function Customer({customer}){
     <Fragment>  
       <CustomerInfo customer={customer}/>
       <AddCarForm customer={customer}/>
-      <CarAccordion cars={cars}/>
+      <CarsAccordions cars={cars}/>
     </Fragment>
   )
 }

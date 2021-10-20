@@ -3,7 +3,7 @@ import SelectCustomerSnackbar from './SelectCustomerSnackbar'
 import Customer from './Customer/Customer'
 
 export default function CustomerProfile({customer, selectCustomer}){
-  const localStoreCustomer = JSON.parse(window.localStorage.getItem('customer'));
+  const localStoreCustomer = JSON.parse(window.localStorage.getItem('customer')) || customer;
 
   return(
     <Fragment>
