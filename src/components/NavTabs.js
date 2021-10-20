@@ -37,7 +37,6 @@ export default function NavTabs(props) {
     setCustomerSelected(customer)
     setSelectedTab(2)
     history.push(`/profile`);
-    window.localStorage.setItem('customer', JSON.stringify(customer));
   }
 
   const handleSelectCustomer = () => {
