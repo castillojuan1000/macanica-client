@@ -34,7 +34,10 @@ export default function DeleteCustomer({customer}) {
     const url = `http://localhost:8080/delete/customer/${customerId}`
 
     axios.delete(url)
-      .then(response => window.location = '/search')
+      .then(response => {
+        window.location = '/search'
+        window.localStorage.setItem('customer', JSON.stringify({}));
+      })
       .catch(error => {
           console.error('There was an error!', error);
       });
