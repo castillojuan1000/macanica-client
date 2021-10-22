@@ -28,15 +28,17 @@ export default function DeleteCustomer({customer}) {
 
   const handleDeleteCustomer = (event) => {
     event.stopPropagation();
-    console.log("API to delete Customer fired up")
     const customerId = customer.ID
 
     const url = `http://localhost:8080/delete/customer/${customerId}`
 
     axios.delete(url)
       .then(response => {
+        let localStorageCustomer = JSON.parse(window.localStorage.getItem('customer'))
+        if(localStorageCustomer.ID === customerId){
+          window.localStorage.setItem('customer', JSON.stringify({}));
+        }
         window.location = '/search'
-        window.localStorage.setItem('customer', JSON.stringify({}));
       })
       .catch(error => {
           console.error('There was an error!', error);
