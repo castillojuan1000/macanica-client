@@ -9,6 +9,8 @@ import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import { blue, deepOrange} from '@mui/material/colors';
 import axios from 'axios';
 import ServicesTimeline from './ServicesTimeline';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function SingleCarAccordion({car, expanded, handlePanel}){
   const [services, setServices]= useState([])
@@ -26,6 +28,17 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
       .catch(error => console.error("There was an error fetching cars and its services", error))
   },[carId])
 
+  const hanldeDeleteCar = (e) => {
+    e.stopPropagation();
+    const url = `http://localhost:8080/delete/car/${carId}`
+
+    axios.delete(url)
+      .then(response => window.location = '/profile')
+      .catch(error => {
+        console.error('There was an error!', error);
+    });
+  }
+
   return(
     <Fragment>
       <Accordion expanded={localStoreExtended === `panel${car.ID}`} onChange={handlePanel(`panel${car.ID}`)} key={car.ID}>
@@ -36,15 +49,24 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
 
         >
           <DirectionsCarRoundedIcon sx={{ color: deepOrange[500], marginRight: 1}}/>
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography sx={{ width: '25%', flexShrink: 0 }}>
             {car.Make} {car.Modelo}
           </Typography>
-          <Typography lang="en" sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography lang="en" sx={{ width: '25%', flexShrink: 0 }}>
             {car.Color}
           </Typography>
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography sx={{ width: '25%', flexShrink: 0 }}>
             {car.VinNumber}
           </Typography>
+          <div sx={{ width: '25%', flexShrink: 0 }}>
+          <IconButton 
+            aria-label="delete" 
+            color="error"
+            onClick={hanldeDeleteCar}
+          >
+            <DeleteIcon />
+          </IconButton>
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <AddServiceForm car={car} expanded={expanded} panelId={`panel${car.ID}`}/>
