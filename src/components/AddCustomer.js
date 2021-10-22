@@ -10,7 +10,6 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import axios from 'axios';
-import CustomerCard from './CustomerCard';
 
 const theme = createTheme();
 
@@ -26,7 +25,6 @@ function validatePhoneNumber(inputtxt) {
 }
 
 export default function AddCustomer() {
-  const [customerData, setCustomerData] = useState({})
   const [duplicatePhoneNumber, setDuplicatePhoneNumber] = useState(false)
   const [validatedNumber, setValidatedNumber] = useState(true)
 
@@ -52,8 +50,9 @@ export default function AddCustomer() {
           if(response.data.hasOwnProperty('Severity')){
             setDuplicatePhoneNumber(true)
           }
-
-          setCustomerData(response.data)
+          console.log(response.data)
+          window.localStorage.setItem('customer', JSON.stringify(response.data));
+          window.location = '/profile'
         })
         .catch(error => {
           console.error('There was an error!', error)
@@ -140,9 +139,6 @@ export default function AddCustomer() {
             >
               Añadir 
             </Button>
-            {
-              customerData.hasOwnProperty('FirstName') && <CustomerCard customerData={customerData}/>
-            }
           </Box>
         </Box>
       </Container>
