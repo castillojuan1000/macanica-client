@@ -36,9 +36,9 @@ export default function AddCustomer() {
     const data = new FormData(event.currentTarget);
 
     const customer = {
-      firstName: data.get('firstName').toLocaleLowerCase(),
-      lastName: data.get('lastName').toLocaleLowerCase(),
-      phone: data.get('phone'),
+      firstName: data.get('firstName').toLocaleLowerCase().trim(),
+      lastName: data.get('lastName').toLocaleLowerCase().trim(),
+      phone: data.get('phone').trim(),
     }
 
     let url = "http://localhost:8080/create/customer";
