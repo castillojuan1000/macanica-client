@@ -19,8 +19,8 @@ export default function AddServiceForm({car, expanded, panelId}) {
   const handleAddingService = (e) => {
     e.preventDefault()
     const service = {
-      Comment: comment,
-      Miles: miles,
+      Comment: comment.trim(),
+      Miles: miles.trim(),
       CarId: carId
     }
 

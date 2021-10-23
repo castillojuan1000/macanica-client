@@ -20,10 +20,10 @@ export default function AddCarForm({customer}) {
   const hanldeAddingCar = (e) => {
     e.preventDefault()
     const car = {
-      Make: marca,
-      Modelo: modelo,
-      Color: color, 
-      VinNumber: vinNumber,
+      Make: marca.trim(),
+      Modelo: modelo.trim(),
+      Color: color.trim(), 
+      VinNumber: vinNumber.trim(),
       CustomerId: customer.ID
     }
 
