@@ -50,13 +50,13 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
         >
           <DirectionsCarRoundedIcon sx={{ color: deepOrange[500], marginRight: 1}}/>
           <Typography sx={{ width: '25%', flexShrink: 0 }}>
-            {car.Make} {car.Modelo}
+            {addCapToString(car.Make)} {addCapToString(car.Modelo)}
           </Typography>
           <Typography lang="en" sx={{ width: '25%', flexShrink: 0 }}>
-            {car.Color}
+            {addCapToString(car.Color)}
           </Typography>
           <Typography sx={{ width: '25%', flexShrink: 0 }}>
-            {car.VinNumber}
+            {handleVinNumber(car.VinNumber)}
           </Typography>
           <div sx={{ width: '25%', flexShrink: 0 }}>
           <IconButton 
@@ -76,3 +76,19 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
     </Fragment>
   )
 } 
+
+function addCapToString(string){
+  return string.charAt(0).toUpperCase() + string.slice(1).trim();
+}
+
+function handleVinNumber(vinNumber){
+  let updatedVinNumber =  vinNumber.split("").map(ch => {
+    if(+ch){
+      return ch
+    }else{
+      return ch.toUpperCase()
+    }
+  })
+
+  return updatedVinNumber.join("")
+}
