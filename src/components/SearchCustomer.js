@@ -9,13 +9,19 @@ import _ from "lodash";
 
 export  default function SearchCustomer({showCustomer}){
   const [clients, setClients] = useState([])
-  const [name, setName] = useState('');
-  const [nameDebounce, setNameDebounce] = useState("")
-  const [lastName, setLastName] = useState('')
-  const [lastNameDebounce, setLastNameDebounce]= useState("")
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [phoneNumberDebounce,setPhoneNumberDebounce] = useState("")
   const [sortedAndFilteredClients, setSortedAndFilteredClients] = useState(clients)
+
+  const [valueState, setValueState] = useState({
+    name: "",
+    lastName: "",
+    phoneNumber: "",
+  })
+
+  const [debouncedValueState, setDebouncedValueState] = useState({
+    debouncedName: "",
+    debouncedLastName: "",
+    debouncedPhoneNumber: "",
+  })
 
 
   useEffect(()=>{
@@ -32,16 +38,16 @@ export  default function SearchCustomer({showCustomer}){
   useEffect(()=>{
     let sortedAndFilteredClients = clients; 
 
-    if(nameDebounce.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.FirstName === nameDebounce)
+    if(debouncedValueState.debouncedName.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.FirstName === debouncedValueState.debouncedName)
     }
 
-    if(lastNameDebounce.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.LastName === lastNameDebounce)
+    if(debouncedValueState.debouncedLastName.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.LastName === debouncedValueState.debouncedLastName)
     }
 
-    if(phoneNumberDebounce.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.Phone === phoneNumberDebounce)
+    if(debouncedValueState.debouncedPhoneNumber.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.Phone === debouncedValueState.debouncedPhoneNumber)
     }
 
     sortedAndFilteredClients = sortedAndFilteredClients.sort((a , b) => {
@@ -53,56 +59,35 @@ export  default function SearchCustomer({showCustomer}){
 
     setSortedAndFilteredClients(sortedAndFilteredClients)
     
-  }, [nameDebounce, lastNameDebounce, phoneNumberDebounce, clients])
+  }, [debouncedValueState.debouncedName, debouncedValueState.debouncedLastName, debouncedValueState.debouncedPhoneNumber, clients])
 
 
-  const handleName = (event) => {
-    setName(event.target.value)
-    debounceName(event.target.value)
+  const handleValueChange = (e) => {
+    setValueState({...valueState, [e.target.name] : e.target.value})
+    debouncedValues(e.target.value, e.target.name, debouncedValueState)
   }
 
-  
-  const debounceName = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
-    _.debounce((_searchVal) => {
-      setNameDebounce(_searchVal);
+  const debouncedValues = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
+    _.debounce((_searchVal, valueName, debouncedValueState) => {
+      console.log(debouncedValueState)
+      if(valueName === "name"){
+        setDebouncedValueState({...debouncedValueState, "debouncedName": _searchVal})
+      }else if(valueName === "lastName"){
+        setDebouncedValueState({...debouncedValueState, "debouncedLastName": _searchVal})
+      }else if(valueName === "telefono"){
+        setDebouncedValueState({...debouncedValueState, "debouncedPhoneNumber": _searchVal})
+      }
     }, 500),
     []
   )
 
-  const handleLastName = event => {
-    setLastName(event.target.value)
-    debounceLastName(event.target.value)
-  }
-
-  const debounceLastName = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
-    _.debounce((_searchVal) => {
-      setLastNameDebounce(_searchVal);
-    }, 500),
-    []
-  );
-
-  const handlePhoneNumber = event => {
-    setPhoneNumber(event.target.value)
-    debouncePhoneNumber(debouncePhoneNumber)
-  }
-
-  const debouncePhoneNumber = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
-    _.debounce((_searchVal) => {
-      setPhoneNumberDebounce(_searchVal);
-    }, 500),
-    []
-  );
-
- 
   return(
     <Fragment>
       <Filter 
-        handleName={handleName}
-        name={name}
-        handleLastName={handleLastName}
-        lastName={lastName}
-        handlePhoneNumber={handlePhoneNumber}
-        phoneNumbere={phoneNumber}
+        name={valueState.name}
+        lastName={valueState.lastName}
+        phoneNumbere={valueState.phoneNumber}
+        handleValueChange={handleValueChange}
       />
       <Container maxWidth="md">
         <CustomersTablePagination customers={sortedAndFilteredClients} showCustomer={showCustomer}/>
