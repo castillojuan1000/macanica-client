@@ -54,7 +54,7 @@ export default function NavTabs(props) {
           centered
           // aria-label="nav tabs example"
         >
-          <Tab label="Crear Cliente" />
+          <Tab label="Añadir Cliente" />
           <Tab label="Buscar Cliente" />
           <Tab label="Perfil Del Cliente" />
           

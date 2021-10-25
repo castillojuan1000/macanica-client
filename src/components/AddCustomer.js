@@ -80,65 +80,67 @@ export default function AddCustomer() {
           <Typography component="h1" variant="h5">
             Añadir Cliente
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
+          <Box sx={{ mt: 3 }}>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="fname"
+                    name="firstName"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lname"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    type="tel"
+                    inputProps={{ maxLength: 10 }}
+                    id="phone"
+                    label="Phone Number"
+                    name="phone"
+                    autoComplete="phone"
+                  />
+                  {
+                    duplicatePhoneNumber && 
+                    <Alert severity="error" style={{marginTop: 10}}>
+                      <AlertTitle>Error</AlertTitle>
+                          <strong>Numero Duplicado!</strong>
+                    </Alert>
+                  }
+                  {
+                    !validatedNumber && 
+                    <Alert severity="error" style={{marginTop: 10}}>
+                      <AlertTitle>Error</AlertTitle>
+                          <strong>Numero De Telefono No Es Valido!</strong>
+                    </Alert>
+                  }
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="tel"
-                  inputProps={{ maxLength: 10 }}
-                  id="phone"
-                  label="Phone Number"
-                  name="phone"
-                  autoComplete="phone"
-                />
-                {
-                  duplicatePhoneNumber && 
-                  <Alert severity="error" style={{marginTop: 10}}>
-                    <AlertTitle>Error</AlertTitle>
-                        <strong>Numero Duplicado!</strong>
-                  </Alert>
-                }
-                {
-                  !validatedNumber && 
-                  <Alert severity="error" style={{marginTop: 10}}>
-                    <AlertTitle>Error</AlertTitle>
-                        <strong>Numero De Telefono No Es Valido!</strong>
-                  </Alert>
-                }
-              </Grid>
-            </Grid>
-            <Button
-              style={{marginTop: 20, marginBottom: 20, color: "white", background: "#3F51B5"}}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 3 }}
-            >
-              Añadir 
-            </Button>
+              <Button
+                style={{marginTop: 20, marginBottom: 20, color: "white", background: "#3F51B5"}}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 3 }}
+              >
+                Añadir 
+              </Button>
+            </form>
           </Box>
         </Box>
       </Container>
