@@ -16,8 +16,6 @@ export default function Customer({customer}){
       .then(response => setCars(response.data.Cars))
   },[customerID])
 
-
-  console.log(cars)
   return(
     <Fragment>  
       <CustomerInfo customer={customer}/>

@@ -22,7 +22,6 @@ export default function DeleteCustomer({customer}) {
 
   const handleClose = (event) => {
     event.stopPropagation();
-    console.log("Cancelar eleminar al cliente")
     setOpen(false);
   };
 
