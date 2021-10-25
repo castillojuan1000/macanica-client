@@ -49,10 +49,10 @@ export default function AddCustomer() {
         .then(response => {
           if(response.data.hasOwnProperty('Severity')){
             setDuplicatePhoneNumber(true)
+          }else{
+            window.localStorage.setItem('customer', JSON.stringify(response.data));
+            window.location = '/profile'
           }
-          console.log(response.data)
-          window.localStorage.setItem('customer', JSON.stringify(response.data));
-          window.location = '/profile'
         })
         .catch(error => {
           console.error('There was an error!', error)

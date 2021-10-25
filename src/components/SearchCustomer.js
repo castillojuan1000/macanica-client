@@ -69,7 +69,6 @@ export  default function SearchCustomer({showCustomer}){
 
   const debouncedValues = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
     _.debounce((_searchVal, valueName, debouncedValueState) => {
-      console.log(debouncedValueState)
       if(valueName === "name"){
         setDebouncedValueState({...debouncedValueState, "debouncedName": _searchVal})
       }else if(valueName === "lastName"){
