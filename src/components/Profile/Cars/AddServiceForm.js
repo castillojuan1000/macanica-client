@@ -118,7 +118,6 @@ export default function AddServiceForm({car, expanded, panelId}) {
                   Cancelar
                 </Button>
                 <Button 
-                  onClick={handleAddingService}
                   variant="outlined" 
                   color="success"
                   type="submit"
