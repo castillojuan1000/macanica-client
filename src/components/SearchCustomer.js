@@ -1,16 +1,28 @@
 import axios from 'axios'
-import React, {useEffect, useState, Fragment} from 'react'
+import React, {useEffect, useState, Fragment, useCallback} from 'react'
 import Filter  from './Filter';
 import Container from '@mui/material/Container';
 import CustomersTablePagination from './TablePagination';
+import _ from "lodash";
+
 
 
 export  default function SearchCustomer({showCustomer}){
   const [clients, setClients] = useState([])
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
   const [sortedAndFilteredClients, setSortedAndFilteredClients] = useState(clients)
+
+  const [valueState, setValueState] = useState({
+    name: "",
+    lastName: "",
+    phoneNumber: "",
+  })
+
+  const [debouncedValueState, setDebouncedValueState] = useState({
+    debouncedName: "",
+    debouncedLastName: "",
+    debouncedPhoneNumber: "",
+  })
+
 
   useEffect(()=>{
     const url = "http://localhost:8080/customers"
@@ -26,16 +38,16 @@ export  default function SearchCustomer({showCustomer}){
   useEffect(()=>{
     let sortedAndFilteredClients = clients; 
 
-    if(name.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.FirstName === name)
+    if(debouncedValueState.debouncedName.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.FirstName === debouncedValueState.debouncedName)
     }
 
-    if(lastName.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.LastName === lastName)
+    if(debouncedValueState.debouncedLastName.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.LastName === debouncedValueState.debouncedLastName)
     }
 
-    if(phoneNumber.length > 0){
-      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.Phone === phoneNumber)
+    if(debouncedValueState.debouncedPhoneNumber.length > 0){
+      sortedAndFilteredClients = sortedAndFilteredClients.filter(client => client.Phone === debouncedValueState.debouncedPhoneNumber)
     }
 
     sortedAndFilteredClients = sortedAndFilteredClients.sort((a , b) => {
@@ -47,33 +59,35 @@ export  default function SearchCustomer({showCustomer}){
 
     setSortedAndFilteredClients(sortedAndFilteredClients)
     
-  }, [name, lastName, phoneNumber, clients])
+  }, [debouncedValueState.debouncedName, debouncedValueState.debouncedLastName, debouncedValueState.debouncedPhoneNumber, clients])
 
 
-  const handleName = (event) => {
-    console.log(event.target.value)
-    setName(event.target.value)
-    
+  const handleValueChange = (e) => {
+    setValueState({...valueState, [e.target.name] : e.target.value})
+    debouncedValues(e.target.value, e.target.name, debouncedValueState)
   }
 
-  const handleLastName = event => {
-    setLastName(event.target.value)
-  }
+  const debouncedValues = useCallback(// eslint-disable-line react-hooks/exhaustive-deps
+    _.debounce((_searchVal, valueName, debouncedValueState) => {
+      console.log(debouncedValueState)
+      if(valueName === "name"){
+        setDebouncedValueState({...debouncedValueState, "debouncedName": _searchVal})
+      }else if(valueName === "lastName"){
+        setDebouncedValueState({...debouncedValueState, "debouncedLastName": _searchVal})
+      }else if(valueName === "telefono"){
+        setDebouncedValueState({...debouncedValueState, "debouncedPhoneNumber": _searchVal})
+      }
+    }, 500),
+    []
+  )
 
-  const handlePhoneNumber = event => {
-    setPhoneNumber(event.target.value)
-  }
-
- 
   return(
     <Fragment>
       <Filter 
-        handleName={handleName}
-        name={name}
-        handleLastName={handleLastName}
-        lastName={lastName}
-        handlePhoneNumber={handlePhoneNumber}
-        phoneNumbere={phoneNumber}
+        name={valueState.name}
+        lastName={valueState.lastName}
+        phoneNumbere={valueState.phoneNumber}
+        handleValueChange={handleValueChange}
       />
       <Container maxWidth="md">
         <CustomersTablePagination customers={sortedAndFilteredClients} showCustomer={showCustomer}/>

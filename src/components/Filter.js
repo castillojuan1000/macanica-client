@@ -4,11 +4,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 export default function Filter({
-  handleName, 
+  handleValueChange,
   name, 
-  handleLastName, 
   lastName, 
-  handlePhoneNumber,
   phoneNumber
 }){
 
@@ -37,23 +35,26 @@ export default function Filter({
         <TextField
             id="outlined-name"
             label="Nombre"
+            name="name"
             value={name}
-            onChange={handleName}
+            onChange={handleValueChange}
           />
 
           <TextField
             id="outlined-name"
             label="Apellido"
             value={lastName}
-            onChange={handleLastName}
+            name="lastName"
+            onChange={handleValueChange}
           />
 
           <TextField
             id="outlined-name"
             label="Telefono"
+            name="telefono"
             value={phoneNumber}
             type='tel'
-            onChange={handlePhoneNumber}
+            onChange={handleValueChange}
           />
       </Box>
     </Container>
