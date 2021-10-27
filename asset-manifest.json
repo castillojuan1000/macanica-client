@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/macanica-client/static/css/main.a617e044.chunk.css",
-    "main.js": "/macanica-client/static/js/main.faaa6be2.chunk.js",
-    "main.js.map": "/macanica-client/static/js/main.faaa6be2.chunk.js.map",
+    "main.js": "/macanica-client/static/js/main.f9275b5b.chunk.js",
+    "main.js.map": "/macanica-client/static/js/main.f9275b5b.chunk.js.map",
     "runtime-main.js": "/macanica-client/static/js/runtime-main.c96686a9.js",
     "runtime-main.js.map": "/macanica-client/static/js/runtime-main.c96686a9.js.map",
     "static/js/2.dedf1f27.chunk.js": "/macanica-client/static/js/2.dedf1f27.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.c96686a9.js",
     "static/js/2.dedf1f27.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.faaa6be2.chunk.js"
+    "static/js/main.f9275b5b.chunk.js"
   ]
 }
