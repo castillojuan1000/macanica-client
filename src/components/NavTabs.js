@@ -1,92 +1,70 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Fragment, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import SearchCustomer from './SearchCustomer';
 import AddCustomer from './AddCustomer';
+import CustomerProfile from './Profile/CustomerProfile';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      aria-labelledby={`nav-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
+export default function NavTabs(props) {
+  const { match, history } = props;
+  const { params } = match;
+  const { page } = params;
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
+  const [customerSelected, setCustomerSelected] = useState({})
 
-function a11yProps(index) {
-  return {
-    id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+  const tabNameToIndex = {
+    0: "create",
+    1: "search",
+    2: "profile",
   };
-}
 
-function LinkTab(props) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
+  const indexToTabName = {
+    create: 0,
+    search: 1,
+    profile: 2,
+  };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-export default function NavTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    history.push(`/${tabNameToIndex[newValue]}`);
+    setSelectedTab(newValue);
   };
 
+  const handleShowCustomer = (customer) => {
+    setCustomerSelected(customer)
+    setSelectedTab(2)
+    history.push(`/profile`);
+    window.localStorage.setItem('customer', JSON.stringify(customer));
+  }
+
+  const handleSelectCustomer = () => {
+    setSelectedTab(1)
+  }
+
   return (
-    <div className={classes.root}>
+    <Fragment>
       <AppBar position="static">
         <Tabs
-          variant="fullWidth"
-          value={value}
+          // variant="fullWidth"
+          value={selectedTab}
           onChange={handleChange}
-          aria-label="nav tabs example"
+          centered
+          // aria-label="nav tabs example"
         >
-          <LinkTab label="Añadir Cliente" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Buscar Cliente" href="/trash" {...a11yProps(1)} />
+          <Tab label="Añadir Cliente" />
+          <Tab label="Buscar Cliente" />
+          <Tab label="Perfil Del Cliente" />
+          
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <AddCustomer />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <SearchCustomer />
-      </TabPanel>
-    </div>
+      {selectedTab === 0 && <AddCustomer />}
+      {selectedTab === 1 && <SearchCustomer showCustomer={handleShowCustomer} />}
+      {selectedTab === 2 && <CustomerProfile customer={customerSelected} selectCustomer={handleSelectCustomer}/>}
+      
+    </Fragment>
   );
 }
+

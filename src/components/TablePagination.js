@@ -18,6 +18,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { styled } from '@mui/material/styles';
 import TableHead from '@mui/material/TableHead';
 import DeleteCustomer from './DeleteCustomer';
+import EditCustomer from './EditCustomer';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -102,7 +103,7 @@ TablePaginationActions.propTypes = {
 
 
 
-export default function CustomersTablePagination({customers}) {
+export default function CustomersTablePagination({customers, showCustomer}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -141,10 +142,7 @@ export default function CustomersTablePagination({customers}) {
             const lastNameCap = LastName.charAt(0).toUpperCase() + LastName.slice(1).trim();
 
             return(
-              <StyledTableRow key={index} onClick={(event)=>{
-                // event.stopPropagation();
-                console.log('customer')
-                }}>
+              <StyledTableRow key={index} onClick={()=>showCustomer(customer)}>
                 <StyledTableCell component="th" scope="row">
                   <strong>{firstNameCap} {lastNameCap}</strong>
                 </StyledTableCell>
@@ -152,10 +150,10 @@ export default function CustomersTablePagination({customers}) {
                   <strong>{phoneNumberDashes}</strong>
                 </StyledTableCell>
                 <StyledTableCell style={{ width: 160 }} align="right">
-                  Edit
+                  <EditCustomer customer={customer}/>
                 </StyledTableCell>
                 <StyledTableCell style={{ width: 160 }} align="right">
-                  <DeleteCustomer/>
+                  <DeleteCustomer customer={customer}/>
                 </StyledTableCell>
               </StyledTableRow>
             )

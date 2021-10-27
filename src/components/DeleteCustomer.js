@@ -6,12 +6,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Slide from '@mui/material/Slide';
+import axios from 'axios'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteCustomer() {
+export default function DeleteCustomer({customer}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (event) => {
@@ -21,13 +22,26 @@ export default function DeleteCustomer() {
 
   const handleClose = (event) => {
     event.stopPropagation();
-    console.log("Cancelar eleminar al cliente")
     setOpen(false);
   };
 
   const handleDeleteCustomer = (event) => {
     event.stopPropagation();
-    console.log("API to delete Customer")
+    const customerId = customer.ID
+
+    const url = `https://mecanica-service.herokuapp.com/delete/customer/${customerId}`
+
+    axios.delete(url)
+      .then(response => {
+        let localStorageCustomer = JSON.parse(window.localStorage.getItem('customer'))
+        if(localStorageCustomer.ID === customerId){
+          window.localStorage.setItem('customer', JSON.stringify({}));
+        }
+        window.location = '/search'
+      })
+      .catch(error => {
+          console.error('There was an error!', error);
+      });
     setOpen(false)
   }
 
