@@ -20,7 +20,7 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
   const carId = car.ID
 
   useEffect(()=> {
-    const url = `http://localhost:8080/car/${carId}`
+    const url = `https://mecanica-service.herokuapp.com/car/${carId}`
     axios.get(url)
       .then(response => {
         setServices(response.data.Services)

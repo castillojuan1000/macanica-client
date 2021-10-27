@@ -25,7 +25,7 @@ export  default function SearchCustomer({showCustomer}){
 
 
   useEffect(()=>{
-    const url = "http://localhost:8080/customers"
+    const url = "https://mecanica-service.herokuapp.com/customers"
     axios.get(url)
       .then(response => { setClients(response.data)})
       .catch(error => {

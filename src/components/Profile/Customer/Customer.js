@@ -11,7 +11,7 @@ export default function Customer({customer}){
   let customerID  = customer.ID
 
   useEffect(()=>{
-    const url = `http://localhost:8080/customer/${customerID}`
+    const url = `https://mecanica-service.herokuapp.com/customer/${customerID}`
     axios.get(url)
       .then(response => setCars(response.data.Cars))
   },[customerID])

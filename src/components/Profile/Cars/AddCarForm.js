@@ -27,7 +27,7 @@ export default function AddCarForm({customer}) {
       CustomerId: customer.ID
     }
 
-    let url = "http://localhost:8080/create/car";
+    let url = "https://mecanica-service.herokuapp.com/create/car";
 
     axios.post(url, car)
       .then(reponse => {

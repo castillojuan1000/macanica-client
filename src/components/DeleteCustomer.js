@@ -29,7 +29,7 @@ export default function DeleteCustomer({customer}) {
     event.stopPropagation();
     const customerId = customer.ID
 
-    const url = `http://localhost:8080/delete/customer/${customerId}`
+    const url = `https://mecanica-service.herokuapp.com/delete/customer/${customerId}`
 
     axios.delete(url)
       .then(response => {

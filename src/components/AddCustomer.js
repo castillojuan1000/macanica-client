@@ -41,7 +41,7 @@ export default function AddCustomer() {
       phone: data.get('phone').trim(),
     }
 
-    let url = "http://localhost:8080/create/customer";
+    let url = "https://mecanica-service.herokuapp.com/create/customer";
 
     if(validatePhoneNumber(data.get('phone'))){
 

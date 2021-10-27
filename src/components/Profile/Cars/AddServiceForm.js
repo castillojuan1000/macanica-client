@@ -24,7 +24,7 @@ export default function AddServiceForm({car, expanded, panelId}) {
       CarId: carId
     }
 
-    const url = "http://localhost:8080/create/service"
+    const url = "https://mecanica-service.herokuapp.com/create/service"
 
     axios.post(url, service)
       .then(response => {
