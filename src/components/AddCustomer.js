@@ -10,7 +10,6 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import axios from 'axios';
-import CustomerCard from './CustomerCard';
 
 const theme = createTheme();
 
@@ -26,7 +25,6 @@ function validatePhoneNumber(inputtxt) {
 }
 
 export default function AddCustomer() {
-  const [customerData, setCustomerData] = useState({})
   const [duplicatePhoneNumber, setDuplicatePhoneNumber] = useState(false)
   const [validatedNumber, setValidatedNumber] = useState(true)
 
@@ -38,12 +36,12 @@ export default function AddCustomer() {
     const data = new FormData(event.currentTarget);
 
     const customer = {
-      firstName: data.get('firstName').toLocaleLowerCase(),
-      lastName: data.get('lastName').toLocaleLowerCase(),
-      phone: data.get('phone'),
+      firstName: data.get('firstName').toLocaleLowerCase().trim(),
+      lastName: data.get('lastName').toLocaleLowerCase().trim(),
+      phone: data.get('phone').trim(),
     }
 
-    let url = "http://localhost:8080/create/customer";
+    let url = "https://mecanica-service.herokuapp.com/create/customer";
 
     if(validatePhoneNumber(data.get('phone'))){
 
@@ -51,9 +49,10 @@ export default function AddCustomer() {
         .then(response => {
           if(response.data.hasOwnProperty('Severity')){
             setDuplicatePhoneNumber(true)
+          }else{
+            window.localStorage.setItem('customer', JSON.stringify(response.data));
+            window.location = '/profile'
           }
-
-          setCustomerData(response.data)
         })
         .catch(error => {
           console.error('There was an error!', error)
@@ -81,68 +80,67 @@ export default function AddCustomer() {
           <Typography component="h1" variant="h5">
             Añadir Cliente
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
+          <Box sx={{ mt: 3 }}>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="fname"
+                    name="firstName"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lname"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    type="tel"
+                    inputProps={{ maxLength: 10 }}
+                    id="phone"
+                    label="Phone Number"
+                    name="phone"
+                    autoComplete="phone"
+                  />
+                  {
+                    duplicatePhoneNumber && 
+                    <Alert severity="error" style={{marginTop: 10}}>
+                      <AlertTitle>Error</AlertTitle>
+                          <strong>Numero Duplicado!</strong>
+                    </Alert>
+                  }
+                  {
+                    !validatedNumber && 
+                    <Alert severity="error" style={{marginTop: 10}}>
+                      <AlertTitle>Error</AlertTitle>
+                          <strong>Numero De Telefono No Es Valido!</strong>
+                    </Alert>
+                  }
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="tel"
-                  inputProps={{ maxLength: 10 }}
-                  id="phone"
-                  label="Phone Number"
-                  name="phone"
-                  autoComplete="phone"
-                />
-                {
-                  duplicatePhoneNumber && 
-                  <Alert severity="error" style={{marginTop: 10}}>
-                    <AlertTitle>Error</AlertTitle>
-                        <strong>Numero Duplicado!</strong>
-                  </Alert>
-                }
-                {
-                  !validatedNumber && 
-                  <Alert severity="error" style={{marginTop: 10}}>
-                    <AlertTitle>Error</AlertTitle>
-                        <strong>Numero De Telefono No Es Valido!</strong>
-                  </Alert>
-                }
-              </Grid>
-            </Grid>
-            <Button
-              style={{marginTop: 20, marginBottom: 20, color: "white", background: "#3F51B5"}}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 3 }}
-            >
-              Añadir 
-            </Button>
-            {
-              customerData.hasOwnProperty('FirstName') && <CustomerCard customerData={customerData}/>
-            }
+              <Button
+                style={{marginTop: 20, marginBottom: 20, color: "white", background: "#3F51B5"}}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 3 }}
+              >
+                Añadir 
+              </Button>
+            </form>
           </Box>
         </Box>
       </Container>

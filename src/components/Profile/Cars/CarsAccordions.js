@@ -21,7 +21,7 @@ export default function CarsAccordions({cars}) {
             <SingleCarAccordion car={car} expanded={expanded} handlePanel={handlePanel} key={car.ID}/>
           ))
         }
-        
+
       </Container>
     </Fragment>
   );

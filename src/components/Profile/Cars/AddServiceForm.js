@@ -19,12 +19,12 @@ export default function AddServiceForm({car, expanded, panelId}) {
   const handleAddingService = (e) => {
     e.preventDefault()
     const service = {
-      Comment: comment,
-      Miles: miles,
+      Comment: comment.trim(),
+      Miles: miles.trim(),
       CarId: carId
     }
 
-    const url = "http://localhost:8080/create/service"
+    const url = "https://mecanica-service.herokuapp.com/create/service"
 
     axios.post(url, service)
       .then(response => {
@@ -102,7 +102,7 @@ export default function AddServiceForm({car, expanded, panelId}) {
                   onChange={(e)=> setMiles(e.target.value)}
                 />
               </Grid>
-              
+
               <Grid 
                 item 
                 xs={4}
@@ -118,7 +118,6 @@ export default function AddServiceForm({car, expanded, panelId}) {
                   Cancelar
                 </Button>
                 <Button 
-                  onClick={handleAddingService}
                   variant="outlined" 
                   color="success"
                   type="submit"

@@ -62,7 +62,7 @@ export default function EditCustomer({customer}) {
       "Phone": phoneNumber
     }
 
-    let url = `http://localhost:8080/update/customer/${customerId}`
+    let url = `https://mecanica-service.herokuapp.com/update/customer/${customerId}`
     const headers =  { "Content-Type": "application/json" }
 
     console.log(newCustomer)

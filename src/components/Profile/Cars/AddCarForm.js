@@ -20,14 +20,14 @@ export default function AddCarForm({customer}) {
   const hanldeAddingCar = (e) => {
     e.preventDefault()
     const car = {
-      Make: marca,
-      Modelo: modelo,
-      Color: color, 
-      VinNumber: vinNumber,
+      Make: marca.trim(),
+      Modelo: modelo.trim(),
+      Color: color.trim(), 
+      VinNumber: vinNumber.trim(),
       CustomerId: customer.ID
     }
 
-    let url = "http://localhost:8080/create/car";
+    let url = "https://mecanica-service.herokuapp.com/create/car";
 
     axios.post(url, car)
       .then(reponse => {
@@ -86,6 +86,7 @@ export default function AddCarForm({customer}) {
                   required
                   id="outlined-required"
                   label="Marca"
+                  autoComplete="marca"
                   value={marca}
                   onChange={(e)=>{setMarca(e.target.value)}}
                 />
@@ -102,6 +103,7 @@ export default function AddCarForm({customer}) {
                   required
                   id="outlined-required"
                   label="Modelo"
+                  autoComplete="modelo"
                   value={modelo}
                   onChange={(e)=> setModelo(e.target.value)}
                 />
@@ -118,6 +120,7 @@ export default function AddCarForm({customer}) {
                   required
                   id="outlined-required"
                   label="Color"
+                  autoComplete="color"
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
                 />
@@ -134,6 +137,7 @@ export default function AddCarForm({customer}) {
                   required
                   id="outlined-required"
                   label="Vin Number"
+                  autoComplete="vinNumber"
                   inputProps={{ maxLength: 17 }}
                   value={vinNumber}
                   onChange={(e)=> setVinNumber(e.target.value)}
@@ -154,7 +158,6 @@ export default function AddCarForm({customer}) {
                   Cancelar
                 </Button>
                 <Button 
-                  onClick={hanldeAddingCar}
                   variant="outlined" 
                   color="success"
                   type="submit"

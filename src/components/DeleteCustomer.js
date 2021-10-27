@@ -22,19 +22,23 @@ export default function DeleteCustomer({customer}) {
 
   const handleClose = (event) => {
     event.stopPropagation();
-    console.log("Cancelar eleminar al cliente")
     setOpen(false);
   };
 
   const handleDeleteCustomer = (event) => {
     event.stopPropagation();
-    console.log("API to delete Customer fired up")
     const customerId = customer.ID
 
-    const url = `http://localhost:8080/delete/customer/${customerId}`
+    const url = `https://mecanica-service.herokuapp.com/delete/customer/${customerId}`
 
     axios.delete(url)
-      .then(response => window.location = '/search')
+      .then(response => {
+        let localStorageCustomer = JSON.parse(window.localStorage.getItem('customer'))
+        if(localStorageCustomer.ID === customerId){
+          window.localStorage.setItem('customer', JSON.stringify({}));
+        }
+        window.location = '/search'
+      })
       .catch(error => {
           console.error('There was an error!', error);
       });
