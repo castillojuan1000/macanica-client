@@ -30,10 +30,10 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
 
   const hanldeDeleteCar = (e) => {
     e.stopPropagation();
-    const url = `http://localhost:8080/delete/car/${carId}`
+    const url = `https://mecanica-service.herokuapp.com/delete/car/${carId}`
 
     axios.delete(url)
-      .then(response => window.location = 'macanica-client/#/profile')
+      .then(response => window.location = '/#/profile')
       .catch(error => {
         console.error('There was an error!', error);
     });

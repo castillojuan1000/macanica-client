@@ -31,7 +31,7 @@ export default function AddCarForm({customer}) {
 
     axios.post(url, car)
       .then(reponse => {
-        window.location = 'macanica-client/#/profile'
+        window.location = '/#/profile'
         setMarca('')
         setModelo("")
         setColor('')
