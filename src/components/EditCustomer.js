@@ -67,7 +67,7 @@ export default function EditCustomer({customer}) {
 
     console.log(newCustomer)
     axios.put(url, newCustomer, {headers})
-      .then(response => window.location = '/#/search')
+      .then(response => window.location = 'macanica-client/#/search')
       .catch(error => console.log("error client side", error))
 
     
