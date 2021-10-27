@@ -33,7 +33,7 @@ export default function SingleCarAccordion({car, expanded, handlePanel}){
     const url = `http://localhost:8080/delete/car/${carId}`
 
     axios.delete(url)
-      .then(response => window.location = '/profile')
+      .then(response => window.location = 'macanica-client/#/profile')
       .catch(error => {
         console.error('There was an error!', error);
     });

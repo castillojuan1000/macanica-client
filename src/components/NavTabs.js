@@ -36,7 +36,7 @@ export default function NavTabs(props) {
   const handleShowCustomer = (customer) => {
     setCustomerSelected(customer)
     setSelectedTab(2)
-    history.push(`/profile`);
+    history.push(`macanica-client/#/profile`);
     window.localStorage.setItem('customer', JSON.stringify(customer));
   }
 

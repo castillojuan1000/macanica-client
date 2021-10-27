@@ -37,7 +37,7 @@ export default function DeleteCustomer({customer}) {
         if(localStorageCustomer.ID === customerId){
           window.localStorage.setItem('customer', JSON.stringify({}));
         }
-        window.location = '/search'
+        window.location = 'macanica-client/#/search'
       })
       .catch(error => {
           console.error('There was an error!', error);
