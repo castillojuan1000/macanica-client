@@ -6,7 +6,7 @@ function App() {
   return (
     <Switch>
       <Redirect exact from="/" to="/create" />
-      <Route exact path="/:page?" render={props => <NavTabs {...props} />} />
+      <Route exact path="macanica-client/#/:page?" render={props => <NavTabs {...props} />} />
     </Switch>
   );
 }
