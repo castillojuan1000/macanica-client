@@ -29,7 +29,7 @@ export default function NavTabs(props) {
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    history.push(`/${tabNameToIndex[newValue]}`);
+    history.push(`macanica-client/#/${tabNameToIndex[newValue]}`); //todo: routing issues 
     setSelectedTab(newValue);
   };
 
