@@ -28,7 +28,7 @@ export default function AddServiceForm({car, expanded, panelId}) {
 
     axios.post(url, service)
       .then(response => {
-        window.location = 'macanica-client/#/profile'
+        window.location = '/profile'
       })
       .catch(error => {
         console.error("There was an error adding a service to the car", error)

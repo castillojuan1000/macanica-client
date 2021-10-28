@@ -51,7 +51,7 @@ export default function AddCustomer() {
             setDuplicatePhoneNumber(true)
           }else{
             window.localStorage.setItem('customer', JSON.stringify(response.data));
-            window.location = '/macanica-client/#/profile'
+            window.location = '/profile'
           }
         })
         .catch(error => {
