@@ -29,14 +29,14 @@ export default function NavTabs(props) {
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    history.push(`macanica-client/#/${tabNameToIndex[newValue]}`); 
+    history.push(`/${tabNameToIndex[newValue]}`); 
     setSelectedTab(newValue);
   };
 
   const handleShowCustomer = (customer) => {
     setCustomerSelected(customer)
     setSelectedTab(2)
-    history.push(`macanica-client/#/profile`);
+    history.push(`/#/profile`);
     window.localStorage.setItem('customer', JSON.stringify(customer));
   }
 
