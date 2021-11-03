@@ -5,9 +5,10 @@ import Tab from '@material-ui/core/Tab';
 import SearchCustomer from './SearchCustomer';
 import AddCustomer from './AddCustomer';
 import CustomerProfile from './Profile/CustomerProfile';
+import { withRouter } from 'react-router-dom'
 
 
-export default function NavTabs(props) {
+function NavTabs(props) {
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -67,4 +68,6 @@ export default function NavTabs(props) {
     </Fragment>
   );
 }
+
+export default withRouter(NavTabs)
 
