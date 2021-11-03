@@ -55,7 +55,7 @@ function AddCustomer() {
           }else{
             window.localStorage.setItem('customer', JSON.stringify(response.data));
             history.push('/profile')
-            // history.push = '/macanica-client/#/profile'
+            window.location = '/profile'
           }
         })
         .catch(error => {
