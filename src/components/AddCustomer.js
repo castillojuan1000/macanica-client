@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -28,6 +29,7 @@ function validatePhoneNumber(inputtxt) {
 function AddCustomer() {
   const [duplicatePhoneNumber, setDuplicatePhoneNumber] = useState(false)
   const [validatedNumber, setValidatedNumber] = useState(true)
+  const history = useHistory()
 
   const handleSubmit = (event) => {
     setValidatedNumber(true)
@@ -52,7 +54,8 @@ function AddCustomer() {
             setDuplicatePhoneNumber(true)
           }else{
             window.localStorage.setItem('customer', JSON.stringify(response.data));
-            window.location = '/macanica-client/#/profile'
+            // history.push('/macanica-client/#/profile')
+            history.push = '/macanica-client/#/profile'
           }
         })
         .catch(error => {
@@ -79,7 +82,7 @@ function AddCustomer() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Añadir Cliente
+            Añadir Cliente!!
           </Typography>
           <Box sx={{ mt: 3 }}>
             <form onSubmit={handleSubmit}>
