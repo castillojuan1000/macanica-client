@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -24,7 +25,7 @@ function validatePhoneNumber(inputtxt) {
   }
 }
 
-export default function AddCustomer() {
+function AddCustomer() {
   const [duplicatePhoneNumber, setDuplicatePhoneNumber] = useState(false)
   const [validatedNumber, setValidatedNumber] = useState(true)
 
@@ -78,7 +79,7 @@ export default function AddCustomer() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Añadir Cliente!!!
+            Añadir Cliente
           </Typography>
           <Box sx={{ mt: 3 }}>
             <form onSubmit={handleSubmit}>
@@ -147,3 +148,5 @@ export default function AddCustomer() {
     </ThemeProvider>
   );
 }
+
+export default withRouter(AddCustomer)
