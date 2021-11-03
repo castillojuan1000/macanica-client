@@ -26,7 +26,7 @@ function validatePhoneNumber(inputtxt) {
   }
 }
 
-function AddCustomer(props) {
+function AddCustomer() {
   const [duplicatePhoneNumber, setDuplicatePhoneNumber] = useState(false)
   const [validatedNumber, setValidatedNumber] = useState(true)
   const history = useHistory()
@@ -54,7 +54,7 @@ function AddCustomer(props) {
             setDuplicatePhoneNumber(true)
           }else{
             window.localStorage.setItem('customer', JSON.stringify(response.data));
-            props.history.push('/macanica-client/#/profile')
+            history.push('/profile')
             // history.push = '/macanica-client/#/profile'
           }
         })
@@ -82,7 +82,7 @@ function AddCustomer(props) {
           }}
         >
           <Typography component="h1" variant="h5">
-            Añadir Cliente
+            Añadir Cliente!!!
           </Typography>
           <Box sx={{ mt: 3 }}>
             <form onSubmit={handleSubmit}>
