@@ -44,6 +44,9 @@ export default function NavTabs(props) {
     setSelectedTab(1)
   }
 
+  console.log("page:", page)
+  console.log("Tab:", selectedTab)
+
   return (
     <Fragment>
       <AppBar position="static">
