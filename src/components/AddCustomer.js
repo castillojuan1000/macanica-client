@@ -54,7 +54,7 @@ function AddCustomer() {
             setDuplicatePhoneNumber(true)
           }else{
             window.localStorage.setItem('customer', JSON.stringify(response.data));
-            history.push('/profile')
+            window.location = '/profile'
           }
         })
         .catch(error => {
