@@ -29,11 +29,6 @@ function NavTabs(props) {
 
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
 
-useEffect(()=>{
-  setSelectedTab(indexToTabName[page])
-  window.location = `/macanica-client/#/${page}`
-},[page])
-
   const handleChange = (event, newValue) => {
     history.push(`/${tabNameToIndex[newValue]}`); 
     setSelectedTab(newValue);
