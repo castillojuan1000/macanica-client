@@ -31,7 +31,7 @@ function NavTabs(props) {
 
 useEffect(()=>{
   setSelectedTab(indexToTabName[page])
-  window.location = `/${page}`
+  window.location = `/macanica-client/#/${page}`
 },[page])
 
   const handleChange = (event, newValue) => {
