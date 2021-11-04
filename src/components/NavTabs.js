@@ -31,6 +31,7 @@ function NavTabs(props) {
 
 useEffect(()=>{
   setSelectedTab(indexToTabName[page])
+  window.location = `/${page}`
 },[page])
 
   const handleChange = (event, newValue) => {
