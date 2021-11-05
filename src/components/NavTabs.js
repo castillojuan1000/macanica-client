@@ -1,13 +1,14 @@
-import React, { Fragment, useState} from 'react';
+import React, { Fragment, useState, useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SearchCustomer from './SearchCustomer';
 import AddCustomer from './AddCustomer';
 import CustomerProfile from './Profile/CustomerProfile';
+import { withRouter } from 'react-router-dom'
 
 
-export default function NavTabs(props) {
+function NavTabs(props) {
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -29,7 +30,7 @@ export default function NavTabs(props) {
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
 
   const handleChange = (event, newValue) => {
-    history.push(`/${tabNameToIndex[newValue]}`);
+    history.push(`/${tabNameToIndex[newValue]}`); 
     setSelectedTab(newValue);
   };
 
@@ -70,4 +71,6 @@ export default function NavTabs(props) {
     </Fragment>
   );
 }
+
+export default withRouter(NavTabs)
 

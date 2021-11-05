@@ -5,22 +5,6 @@ import Container from '@mui/material/Container';
 import SnackbarContent from '@mui/material/SnackbarContent';
 
 
-
-// const accion = (
-//   <Button 
-//     variant="outlined" 
-//     color="success"
-//     // onClick={() => selectCustomer()}
-//     sx={{
-//       marginTop: 1,
-//     }}
-//     >
-//       Seleccionar Cliente
-//   </Button>
-// );
-
-
-
 export default function SelectCustomerSnackbar({selectCustomer}) {
 
   const accion = (

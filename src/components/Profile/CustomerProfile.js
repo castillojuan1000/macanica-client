@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react'
 import Customer from './Customer/Customer'
 import SelectCustomerSnackbar from './SelectCustomerSnackbar'
+import { withRouter } from 'react-router';
 
-export default function CustomerProfile({customer, selectCustomer}){
+function CustomerProfile({customer, selectCustomer}){
   const localStorageCustomer = JSON.parse(window.localStorage.getItem('customer')) || customer;
 
   return(
@@ -18,3 +19,5 @@ export default function CustomerProfile({customer, selectCustomer}){
     </Fragment>
   )
 }
+
+export default withRouter(CustomerProfile)
