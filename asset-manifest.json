@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/macanica-client/static/css/main.a617e044.chunk.css",
-    "main.js": "/macanica-client/static/js/main.f63dbc2c.chunk.js",
-    "main.js.map": "/macanica-client/static/js/main.f63dbc2c.chunk.js.map",
+    "main.js": "/macanica-client/static/js/main.4e917600.chunk.js",
+    "main.js.map": "/macanica-client/static/js/main.4e917600.chunk.js.map",
     "runtime-main.js": "/macanica-client/static/js/runtime-main.c96686a9.js",
     "runtime-main.js.map": "/macanica-client/static/js/runtime-main.c96686a9.js.map",
-    "static/js/2.35499302.chunk.js": "/macanica-client/static/js/2.35499302.chunk.js",
-    "static/js/2.35499302.chunk.js.map": "/macanica-client/static/js/2.35499302.chunk.js.map",
+    "static/js/2.72fedab9.chunk.js": "/macanica-client/static/js/2.72fedab9.chunk.js",
+    "static/js/2.72fedab9.chunk.js.map": "/macanica-client/static/js/2.72fedab9.chunk.js.map",
     "static/js/3.7fcfdd16.chunk.js": "/macanica-client/static/js/3.7fcfdd16.chunk.js",
     "static/js/3.7fcfdd16.chunk.js.map": "/macanica-client/static/js/3.7fcfdd16.chunk.js.map",
     "index.html": "/macanica-client/index.html",
     "static/css/main.a617e044.chunk.css.map": "/macanica-client/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.35499302.chunk.js.LICENSE.txt": "/macanica-client/static/js/2.35499302.chunk.js.LICENSE.txt"
+    "static/js/2.72fedab9.chunk.js.LICENSE.txt": "/macanica-client/static/js/2.72fedab9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c96686a9.js",
-    "static/js/2.35499302.chunk.js",
+    "static/js/2.72fedab9.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.f63dbc2c.chunk.js"
+    "static/js/main.4e917600.chunk.js"
   ]
 }
